@@ -10,6 +10,10 @@ app.get("/saurabh", (req, res) => {
   res.send("SAURABH");
 });
 
+app.post("/post", (req, res) => {
+  res.send({'name':'saurahb'});
+});
+
 app.get("/login", (req, res) => {
   res.send("this is login page");
 });
