@@ -1,9 +1,25 @@
 export const Profile = (req, res) => {
-  res.send("User profile data from controller.");
+  res.status(200).json({
+    success: true,
+    message: "User profile data fetched successfully",
+    data: {
+      name: "Saurabh",
+    },
+  });
 };
+
 export const Cart = (req, res) => {
-  res.send("User cart data from controller.");
+  res.status(200).json({
+    success: true,
+    message: "User cart data fetched successfully",
+    data: [],
+  });
 };
+
 export const Orders = (req, res) => {
-  res.send("User orders data from controller.");
+  res.status(200).json({
+    success: true,
+    message: "User orders data fetched successfully",
+    data: [],
+  });
 };
