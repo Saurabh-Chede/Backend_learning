@@ -10,5 +10,5 @@ app.get("/", (req, res) => {
 app.use("/api/v1", MainRouter);
 
 app.listen(8000, () => {
-  console.log("Server is running on port 8000.");
+  console.log("Server running on port 8000.");
 });
