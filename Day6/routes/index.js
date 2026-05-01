@@ -6,5 +6,6 @@ const MainRouter = Router();
 
 MainRouter.use("/auth", AuthRouter);
 MainRouter.use("/user", UserRouter);
+// MainRouter.use("/user", UserRouter);
 
 export default MainRouter;
