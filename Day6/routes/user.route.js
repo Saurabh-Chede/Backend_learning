@@ -7,6 +7,6 @@ UserRouter.post("/profile", Profile);
 UserRouter.post("/cart", Cart);
 UserRouter.post("/orders", Orders);
 UserRouter.patch("/update-profile/:userId", UpdateProfile);
-UserRouter.delete("/delete-user/:userId", DeleteProfile);
+UserRouter.delete("/delete-profile/:userId", DeleteProfile);
 
 export default UserRouter;
