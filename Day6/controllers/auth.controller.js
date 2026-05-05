@@ -33,3 +33,4 @@ export const Login = (req, res) => {
 export const Logout = (req, res) => {
   res.send("User logged out successfully from controller.");
 };
+
