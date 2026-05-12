@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { AllUsers, SingleUsers } from "../controllers/admin.controller.js";
+import { AllSellers, AllUsers, SingleUsers } from "../controllers/admin.controller.js";
 
 const AdminRouter = Router();
 
@@ -9,5 +9,6 @@ AdminRouter.get("/", (req, res) => {
 
 AdminRouter.get("/all-users", AllUsers);
 AdminRouter.get("/single-user/:id", SingleUsers);
+AdminRouter.get("/all-sellers", AllSellers);
 
 export default AdminRouter;
