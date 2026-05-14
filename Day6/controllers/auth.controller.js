@@ -1,5 +1,6 @@
 import UserModel from "../models/user.schema.js";
 import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
 
 export const Register = async (req, res) => {
   try {
@@ -55,13 +56,40 @@ export const Login = async (req, res) => {
     // token creation - jwt- jsonwebtoken 
     // store token into cookie
 
-    return res
-      .status(200)
-      .json({ message: "User logged in successfully", user: user });
+    const token = jwt.sign(
+      {id:user._id, role:user.role},
+      process.env.JWT_SECRET
+    )
+    console.log(token, "token");
+    res.cookie("token", token);
+
+     const userData = {
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      role: user.role,
+    };
+
+    return res.status(200).json({
+      message: "User logged in successfully",
+      user: userData,
+      success: true,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: "Error logging in user",
+      error: error.message,
+      success: false,
+    });
+  }
+};
+
+export const getCurrentUser = async (req, res) => {
+  try {
   } catch (error) {
     return res
       .status(500)
-      .json({ message: "Error logging in user", error: error.message });
+      .json({ message: "Error getting current user", error: error.message });
   }
 };
 
