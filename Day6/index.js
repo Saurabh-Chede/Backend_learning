@@ -3,10 +3,12 @@ import MainRouter from "./routes/index.js";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 
 const app = express();
 dotenv.config();
 app.use(express.json());
+app.use(cookieParser());
 
 const corsOptions = {
   origin: ["http://localhost:5173", "http://localhost:5174"],
@@ -20,7 +22,7 @@ app.get("/", (req, res) => {
 
 app.use("/api/v1", MainRouter);
 
-mongoose.connect(process.env.MONGODB_URL).then(() => {
+mongoose.connect(process.env.MONGODB_URI).then(() => {
   console.log("Connected to MongoDB.");
 });
 

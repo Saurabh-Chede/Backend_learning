@@ -1,5 +1,6 @@
 import { Router } from "express";
 import {
+  getCurrentUser,
   Login,
   Logout,
   Register,
@@ -11,6 +12,7 @@ const AuthRouter = Router();
 AuthRouter.post("/register", Register);
 AuthRouter.put("/update-user-password", UpdateUserPassword);
 AuthRouter.post("/login", Login);
-AuthRouter.post("/logout", Logout);
+AuthRouter.get("/get-current-user", getCurrentUser);
+AuthRouter.get("/logout", Logout);
 
 export default AuthRouter;
