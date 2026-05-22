@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { sortProducts , paginationProducts, searchProducts} from "../controllers/product.controller.js";
 
+
 const ProductRouter = Router();
 
 ProductRouter.get("/sort", sortProducts);

@@ -1,13 +1,19 @@
-import UserModel from "../models/user.schema.js";
+import UserModel from "../models/user.schema.js"
 
 export const Profile = (req, res) => {
-  res.status(200).json({
-    success: true,
-    message: "User profile data fetched successfully",
-    data: {
-      name: "Saurabh",
-    },
-  });
+  try {
+    const userId = req.userId;
+    const userData = req.userData;
+    console.log(userId, "userId");
+    console.log(userData, "userData");
+    userData.password = req.userPassword;
+    return res.status(200).json({ success: true, profileData: userData });
+    res.send(true);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Error updating profile", error: error.message });
+  }
 };
 
 export const Cart = (req, res) => {

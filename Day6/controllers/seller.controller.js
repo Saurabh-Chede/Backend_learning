@@ -2,48 +2,58 @@ import ProductModel from "../models/product.schema.js";
 
 export const addProduct = async (req, res) => {
   try {
-    const { name, price, description, image, category, stock, userId } =
-      req.body;
+    const { name, price, description, image, category, stock } = req.body;
 
-    // Validate required fields
+    const userId = req.userId;
+
     if (
       !name ||
       !price ||
       !description ||
       !image ||
       !category ||
-      !stock ||
-      !userId
+      stock === undefined
     ) {
-      return res.status(400).json({ message: "All fields are required" });
+      return res.status(400).json({
+        message: "All fields are required",
+      });
     }
 
     const newProduct = new ProductModel({
-      name: name,
-      price: price,
-      description: description,
-      image: image,
-      category: category,
-      stock: stock,
+      name,
+      price,
+      description,
+      image,
+      category,
+      stock,
       seller: userId,
     });
+
     await newProduct.save();
-    return res
-      .status(201)
-      .json({ message: "Product added successfully", product: newProduct });
+
+    return res.status(201).json({
+      success: true,
+      message: "Product added successfully",
+      product: newProduct,
+    });
   } catch (error) {
-    return res.status(500).json({ message: "Internal Server Error", error });
+    console.log("Add Product Error:", error);
+
+    return res.status(500).json({
+      message: "Internal Server Error",
+      error: error.message,
+    });
   }
 };
 
 export const getProducts = async (req, res) => {
   try {
-    const userId = req.query.userId;
+    const userId = req.userId;
     const products = await ProductModel.find({ seller: userId }).populate(
       "seller",
       "name email",
     );
-    return res.status(200).json({ products });
+    return res.status(200).json({ products, success: true });
   } catch (error) {
     return res.status(500).json({ message: "Internal Server Error", error });
   }

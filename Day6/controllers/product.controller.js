@@ -8,16 +8,12 @@ export const sortProducts = async (req, res) => {
         message: "Please provide sortBy and sortOrder query parameters",
       });
     }
+
     const sortFilter = {};
-    // if (sortOrder == "asc")
-    //   sortFilter[sortBy] = 1;
-    // } else {
-    //   sortFilter[sortBy] = -1;
-    // }
     sortFilter[sortBy] = sortOrder === "asc" ? 1 : -1;
     console.log(sortFilter, "sortFilter");
 
-    const products = await ProductModel.find().sort(sortFilter).limit(3);
+    const products = await ProductModel.find().sort(sortFilter).limit(2);
     res.status(200).json({ message: "Products sorted successfully", products });
   } catch (err) {
     res.status(500).json({ message: err.message });
